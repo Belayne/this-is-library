@@ -15,7 +15,7 @@
     <div class="container">
         <button class="add-btn" type="button">+</button>
     </div>
-    <div class="form-div">
+    <div class="form-div hidden">
         <form action="">
             <fieldset>
                 <legend>Enter book details</legend>
@@ -25,13 +25,12 @@
                 <div class="summary-div"><label for="summary">Summary</label><textarea name="summary" id="summary" cols="30" rows="10"></textarea></div>
                 <fieldset>
                     <legend>Did you read it?</legend>
-                    <div><label for="read-yes">Yes </label><input type="radio" name="read-status" id="read-yes"></div>
-                    <div><label for="read-no">No </label><input type="radio" name="read-status" id="read-no"></div>
+                    <div><label for="read-yes">Yes </label><input type="checkbox" value="yes" name="read-status" id="read-yes"></div>
                 </fieldset>
             </fieldset>
             <div>
-                <button type="submit">Add book</button>
-                <button type="button">Cancel</button>
+                <button id="add-book" type="button">Add book</button>
+                <button id="cancel-form" type="button">Cancel</button>
             </div>
         </form>
     </div>
