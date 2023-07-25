@@ -19,19 +19,14 @@ function Book(title, author, pages, summary, read) {
     this.pages = pages;
     this.summary = summary;
     this.read = read;
-
-    this.readBook = () => {
-        this.read = true;
-    }
-
-    this.unreadBook = () => {
-        this.read = false;
-    }
 }
+
+Book.prototype.readBook = () => this.read = true;
+Book.prototype.unreadBook = () => this.read = false;
 
 addBookBtn.addEventListener('click', showForm)
 cancelFormBtn.addEventListener('click', hideForm)
-addBookFormBtn.addEventListener('click', createBook);
+form.addEventListener('submit', e => createBook(e))
 
 function showForm() {
     bookFormDiv.classList.remove('hidden')
@@ -41,19 +36,27 @@ function hideForm() {
     bookFormDiv.classList.add('hidden')
 };
 
-function createBook() {
+function createBook(e) {
+    e.preventDefault();
     let title = formBookTitle.value;
     let author = formBookAuthor.value;
     let pages = formBookPages.value;
     let summary = formBookSummary.value;
     let read = formBookRead.checked
     const newBook = new Book(title, author, pages, summary, read)
-    addBook(newBook)
-}
-
-function addBook(newBook) {
-    console.log(newBook);
-    myLibrary.push(newBook);
+    addBookToLibrary(newBook);
     hideForm();
     form.reset();
+    createBookElem(newBook);
+}
+
+function addBookToLibrary(newBook) {
+    myLibrary.push(newBook);
+}
+
+function createBookElem(newBook) {
+    let newBookElem = document.createElement("article");
+    let titleElem = document.createElement("h2");
+    titleElem.textContent = newBook.title;
+    newBookElem.appendChild()
 }
