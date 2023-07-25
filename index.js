@@ -1,6 +1,8 @@
 const addBookBtn = document.querySelector('.add-btn');
 const bookFormDiv = document.querySelector('.form-div');
 const form = document.querySelector('form');
+const bookElem = document.querySelector('.book');
+const containerDiv = document.querySelector('.container');
 
 const addBookFormBtn = document.querySelector('#add-book');
 const cancelFormBtn = document.querySelector('#cancel-form');
@@ -19,6 +21,7 @@ function Book(title, author, pages, summary, read) {
     this.pages = pages;
     this.summary = summary;
     this.read = read;
+    this.dataID = this.title + this.author + this.pages;
 }
 
 Book.prototype.readBook = () => this.read = true;
@@ -54,9 +57,30 @@ function addBookToLibrary(newBook) {
     myLibrary.push(newBook);
 }
 
+function removeBookFromLibrary(bookID) {
+    myLibrary = myLibrary.filter(book => book.dataID != bookID)
+}
+
 function createBookElem(newBook) {
-    let newBookElem = document.createElement("article");
-    let titleElem = document.createElement("h2");
-    titleElem.textContent = newBook.title;
-    newBookElem.appendChild()
+    let newBookElem = bookElem.cloneNode(true);
+    newBookElem.querySelector('.author').textContent = newBook.author;
+    newBookElem.querySelector('.book-title').textContent = newBook.title;
+    newBookElem.querySelector('.read-state').textContent = (newBook.read)? "Read Status: read": "Read Status: not read"
+    newBookElem.querySelector('button').addEventListener("click", removeBook);
+    newBookElem.classList.remove('hidden');
+    newBookElem.setAttribute("data-id", newBook.dataID)
+    newBookElem.querySelector('.read-state').addEventListener('click',toggleReadStatus)
+    bookElem.insertAdjacentElement("beforebegin", newBookElem);
+}
+
+function removeBook() {
+    removeBookFromLibrary(this.getAttribute('book-id'));
+    containerDiv.removeChild(this.parentNode);
+}
+
+function toggleReadStatus() {
+    let bookID = this.parentElement.getAttribute("data-id");
+    let bookIndex = myLibrary.findIndex(book => book.dataID == bookID);
+    myLibrary[bookIndex].readBook();
+    this.textContent = "Read Status: read";
 }
