@@ -79,7 +79,7 @@ function createBookElem(newBook) {
     let newBookElem = bookElem.cloneNode(true);
     newBookElem.querySelector('.author').textContent = newBook.author;
     newBookElem.querySelector('.book-title').textContent = newBook.title;
-    newBookElem.querySelector('.read-state').textContent = (newBook.read)? "Read Status: read": "Read Status: not read"
+    newBookElem.querySelector('.read-state').textContent = (newBook.read)? "Yes": "No"
     newBookElem.querySelector('button').addEventListener("click", removeBook);
     newBookElem.classList.remove('hidden');
     newBookElem.setAttribute("data-id", newBook.dataID)
@@ -90,4 +90,11 @@ function createBookElem(newBook) {
 function removeBook() {
     myLibrary.removeBookFromLibrary(this.getAttribute('book-id'));
     containerDiv.removeChild(this.parentNode);
-} 
+}
+
+function toggleReadStatus() {
+    let bookID = this.parentElement.getAttribute("data-id");
+    let bookIndex = myLibrary.findIndex(book => book.dataID == bookID);
+    myLibrary[bookIndex].readBook();
+    this.textContent = "Read Status: read";
+}
