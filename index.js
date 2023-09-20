@@ -13,19 +13,41 @@ const formBookPages = document.querySelector('#pages');
 const formBookSummary = document.querySelector('#summary');
 const formBookRead = document.querySelector('#read-yes');
 
-let myLibrary = [];
 
-function Book(title, author, pages, summary, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.summary = summary;
-    this.read = read;
-    this.dataID = this.title + this.author + this.pages;
+class Library {
+    constructor(bookList = []){
+        this.bookList = bookList;
+    }
+
+    addBookToLibrary(newBook) {
+        this.bookList.push(newBook);
+    }
+
+    removeBookFromLibrary(bookID) {
+       this.bookList = this.bookList.filter(book => book.dataID != bookID)
+    }
 }
 
-Book.prototype.readBook = () => this.read = true;
-Book.prototype.unreadBook = () => this.read = false;
+const myLibrary = new Library();
+
+class Book {
+    constructor(title, author, pages, summary, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.summary = summary;
+        this.read = read;
+        this.dataID = this.title + this.author + this.pages;
+    }
+
+    readBook() {
+        this.read = true;
+    }
+    
+    unreadBook() {
+        this.read = false;
+    }
+}
 
 addBookBtn.addEventListener('click', showForm)
 cancelFormBtn.addEventListener('click', hideForm)
@@ -47,18 +69,10 @@ function createBook(e) {
     let summary = formBookSummary.value;
     let read = formBookRead.checked
     const newBook = new Book(title, author, pages, summary, read)
-    addBookToLibrary(newBook);
+    myLibrary.addBookToLibrary(newBook);
     hideForm();
     form.reset();
     createBookElem(newBook);
-}
-
-function addBookToLibrary(newBook) {
-    myLibrary.push(newBook);
-}
-
-function removeBookFromLibrary(bookID) {
-    myLibrary = myLibrary.filter(book => book.dataID != bookID)
 }
 
 function createBookElem(newBook) {
@@ -74,13 +88,6 @@ function createBookElem(newBook) {
 }
 
 function removeBook() {
-    removeBookFromLibrary(this.getAttribute('book-id'));
+    myLibrary.removeBookFromLibrary(this.getAttribute('book-id'));
     containerDiv.removeChild(this.parentNode);
-}
-
-function toggleReadStatus() {
-    let bookID = this.parentElement.getAttribute("data-id");
-    let bookIndex = myLibrary.findIndex(book => book.dataID == bookID);
-    myLibrary[bookIndex].readBook();
-    this.textContent = "Read Status: read";
-}
+} 
