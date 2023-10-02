@@ -75,6 +75,7 @@ function createBookElem(newBook) {
     let newBookElem = bookElem.cloneNode(true);
     newBookElem.querySelector('.author').textContent = newBook.author;
     newBookElem.querySelector('.book-title').textContent = newBook.title;
+    newBookElem.querySelector('.pages').textContent = newBook.pages;
     newBookElem.querySelector('.read-state').textContent = (newBook.read)? "Yes": "No"
     newBookElem.querySelector('button').addEventListener("click", removeBook);
     newBookElem.classList.remove('hidden');
@@ -93,4 +94,5 @@ function toggleReadStatus() {
     let book = myLibrary.bookList.find(book => book.dataID == bookID);
     book.toggleRead();
     this.textContent = (book.read)? "Yes": "No";
+    this.classList.toggle("read");
 }

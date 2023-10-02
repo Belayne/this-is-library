@@ -134,6 +134,10 @@ form {
     background-color: var(--form-bg-clr);
 }
 
+.read {
+    background-color: var(--btn-clr-act);
+}
+
 fieldset {
     padding: 10px;
 }
