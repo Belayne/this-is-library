@@ -38,32 +38,41 @@ body {
 .container {
     display: grid;
     width: 100%;
-    border: 1px solid var(--field-bd);
 }
 
 .table-head {
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 0.5fr 30px;
+    grid-template-columns: 2fr 2fr 1fr 0.5fr 50px;
     font-weight: bold;
 }
 
 .book {
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 0.5fr 30px;
-    
+    grid-template-columns: 2fr 2fr 1fr 0.5fr 50px;
+}
+
+.table-head *:last-child {
+    border-right: 1px solid var(--field-bd);
+}
+
+.table-head p:first-child {
+    border-left: 1px solid var(--field-bd);
 }
 
 .table-head p, .book * {
     border-left: 1px solid var(--field-bd);
+    border-bottom: 1px solid var(--field-bd);
     padding: 5px;
+}
+.table-head p {
+    border-top: 1px solid var(--field-bd);
+}
+.container .book:first-of-type p {
+    border-top: none;
 }
 
 .book * {
-    border-top: 1px solid var(--field-bd);
-}
-
-.table-head *:first-child, .book *:first-child {
-    border-left: none;
+    border-bottom: 1px solid var(--field-bd);
 }
 
 .book button {
@@ -74,11 +83,12 @@ body {
     padding: 0 10px;
     font-size: 1.5rem;
     font-weight: bold;
-    justify-self: end;
+    justify-self: right;
 }
 
 .read-state {
     background-color: #764248;
+    border-right: 1px solid var(--field-bd);
 }
 
 .read-state:hover {
@@ -94,6 +104,7 @@ body {
     border-radius: 10px;
     border: 2px solid #FFF;
     background-color: var(--btn-clr);
+    
 }
 
 button:hover {
