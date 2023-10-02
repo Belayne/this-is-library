@@ -43,13 +43,13 @@ body {
 
 .table-head {
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 1fr 30px;
+    grid-template-columns: 2fr 2fr 1fr 0.5fr 30px;
     font-weight: bold;
 }
 
 .book {
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 1fr 30px;
+    grid-template-columns: 2fr 2fr 1fr 0.5fr 30px;
     
 }
 
@@ -66,12 +66,10 @@ body {
     border-left: none;
 }
 
-.book p:last-child {
-    grid-column: 4 / 5;
-}
-
 .book button {
-    background-color: var(--btn-clr);
+    background-color: red;
+    color: white;
+    border-radius: 5px;
     border: 2px solid white;
     padding: 0 10px;
     font-size: 1.5rem;

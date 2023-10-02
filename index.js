@@ -40,12 +40,8 @@ class Book {
         this.dataID = this.title + this.author + this.pages;
     }
 
-    readBook() {
-        this.read = true;
-    }
-    
-    unreadBook() {
-        this.read = false;
+    toggleRead() {
+        this.read = !this.read;
     }
 }
 
@@ -94,7 +90,7 @@ function removeBook() {
 
 function toggleReadStatus() {
     let bookID = this.parentElement.getAttribute("data-id");
-    let bookIndex = myLibrary.findIndex(book => book.dataID == bookID);
-    myLibrary[bookIndex].readBook();
-    this.textContent = "Read Status: read";
+    let book = myLibrary.bookList.find(book => book.dataID == bookID);
+    book.toggleRead();
+    this.textContent = (book.read)? "Yes": "No";
 }
